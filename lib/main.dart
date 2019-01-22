@@ -9,7 +9,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final title = 'WebSocket Demo';
-    return MaterialApp(
+    return MaterialApp(      
+      debugShowCheckedModeBanner: false,
       title: title,
       home: MyHomePage(
         title: title,
@@ -76,9 +77,9 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  @override
-  void dispose() {
-    widget.channel.sink.close();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   widget.channel.sink.close();
+  //   super.dispose();
+  // }
 }
