@@ -33,6 +33,19 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   TextEditingController _controller = TextEditingController();
+  
+
+  double _value=0.0;
+  String _sliderValue;
+
+  onChanged(double value){
+    setState(() {
+          _value = value;  
+          _sliderValue="#"+_value.toString(); //Adds a # so that the webserver treats the value sent as brightness value and not a string
+          widget.channel.sink.add(_sliderValue);
+          debugPrint(_sliderValue);
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +72,15 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Text(snapshot.hasData ? '${snapshot.data}' : ''),
                 );
               },
-            )
+            ),
+            Container(
+              child: Slider(
+                min: 0,
+                max: 1023,
+                value: _value,
+                onChanged: onChanged
+                ),
+            ),
           ],
         ),
       ),
